@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Directorio de pacientes de la veterinaria VetCare.">
+  <title>Veterinaria San Pio | Fichas de mascotas</title>
+  <script src="js/main.js" defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      background: #f4f8f6;
+      color: #20312b;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      color: #176b52;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #64756e;
+    }
+
+    .mascotas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+    }
+
+    footer {
+      margin-top: 35px;
+      text-align: center;
+      color: #718078;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>🐾 Veterinaria San Pio</h1>
+      <p>Directorio de pacientes de nuestra veterinaria</p>
+    </header>
+
+    <section class="mascotas" aria-label="Fichas de pacientes">
+
+      <ficha-mascota nombre="Max" especie="Perro" edad="3 años" vacuna="25/11/2026">
+        Paciente activo y en buen estado general. Tiene programado su próximo control.
+      </ficha-mascota>
+
+      <ficha-mascota nombre="Luna" especie="Gato" edad="2 años" vacuna="02/12/2026">
+        Se recomienda continuar con sus controles veterinarios periódicos.
+      </ficha-mascota>
+
+      <ficha-mascota nombre="Toby" especie="Perro" edad="5 años" vacuna="15/12/2026">
+        Tiene pendiente su próxima revisión general y seguimiento de vacunas.
+      </ficha-mascota>
+
+    </section>
+
+    <footer>
+      VetCare · Cuidamos a quienes hacen parte de tu familia
+    </footer>
+  </main>
+
+  <template id="plantilla-mascota">
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+      }
+
+      .ficha {
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid #dce9e2;
+        border-radius: 18px;
+        background: white;
+        box-shadow: 0 7px 22px rgba(31,75,55,.07);
+        transition: transform .18s, box-shadow .18s;
+      }
+
+      .ficha:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(31,75,55,.13);
+      }
+
+      .encabezado {
+        padding: 22px 22px 16px;
+        background: #e9f6ef;
+      }
+
+      .icono {
+        display: grid;
+        width: 58px;
+        height: 58px;
+        margin-bottom: 13px;
+        place-items: center;
+        border-radius: 16px;
+        background: white;
+        font-size: 2rem;
+      }
+
+      h2 {
+        margin: 0 0 4px;
+        color: #176b52;
+        font-size: 1.45rem;
+      }
+
+      .especie {
+        margin: 0;
+        color: #547166;
+        font-weight: 700;
+      }
+
+      .contenido {
+        padding: 20px 22px 22px;
+      }
+
+      .dato {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 0 0 13px;
+        color: #64756e;
+        font-size: .94rem;
+      }
+
+      .dato strong {
+        color: #263b32;
+        text-align: right;
+      }
+
+      .vacuna {
+        padding: 11px 12px;
+        border-radius: 10px;
+        background: #f0f8f3;
+        color: #176b52;
+      }
+
+      .observaciones {
+        margin-top: 17px;
+        padding-top: 15px;
+        border-top: 1px solid #e7eee9;
+      }
+
+      .observaciones h3 {
+        margin: 0 0 7px;
+        color: #263b32;
+        font-size: .95rem;
+      }
+
+      ::slotted(*) {
+        color: #64756e;
+        font-size: .9rem;
+        line-height: 1.55;
+      }
+    </style>
+
+    <article class="ficha">
+      <div class="encabezado">
+        <div class="icono" aria-hidden="true">🐾</div>
+        <h2 class="nombre"></h2>
+        <p class="especie"></p>
+      </div>
+
+      <div class="contenido">
+        <p class="dato">
+          <span>Edad</span>
+          <strong class="edad"></strong>
+        </p>
+
+        <p class="dato vacuna">
+          <span>Próxima vacuna</span>
+          <strong class="fecha-vacuna"></strong>
+        </p>
+
+        <div class="observaciones">
+          <h3>Observaciones</h3>
+          <slot>Sin observaciones registradas.</slot>
+        </div>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
